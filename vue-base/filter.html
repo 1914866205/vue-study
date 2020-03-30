@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content="Vue.js学习" />
+    <meta name="description" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-status-bar-style" content="black" />
+
+    <title>过滤器</title>
+    <style>
+      .input {
+        width: 400px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input class="input" type="text" v-model="text" />
+      <h1>{{numPrint}}</h1>
+      <h1>{{message.split('').reverse().join('')}}</h1>
+      <h2>{{this.reversedMessageMethod()}}</h2>
+      <h3>{{message | reverseString}}</h3>
+
+      <h1>{{time.getFullYear()+'年'+(time.getMonth()+1)+'月'+time.getDate()+'日'}}</h1>
+      <h2>{{this.timeFormat()}}</h2>
+      <h3>{{time | timeFilter}}</h3>
+      <p :title="time | timeFilter">绑定日期过滤器</p>
+      <h1>计算属性</h1>
+      <h1>{{reversedMessage}}</h1>
+      <h1>{{dataPrint}}</h1>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          message: 'HelloVue',
+          time: new Date(),
+          text: ''
+        },
+        methods: {
+          reversedMessageMethod() {
+            return this.message
+              .split('')
+              .reverse()
+              .join('')
+          },
+          timeFormat() {
+            let time = new Date(this.time)
+            let year = time.getFullYear() + '年'
+            let month = time.getMonth() + 1 + '月'
+            let day = time.getDate() + '日'
+            return year + month + day
+          }
+        },
+        filters: {
+          reverseString(val) {
+            let value = val
+            if (!value) {
+              return ''
+            }
+            value = value
+              .split('')
+              .reverse()
+              .join('')
+            return value
+          },
+          timeFilter(val) {
+            let time1 = val
+            let time = new Date(time1)
+            let year = time.getFullYear() + '年'
+            let month = time.getMonth() + 1 + '月'
+            let day = time.getDate() + '日'
+            return year + month + day
+          }
+        },
+        computed: {
+          // 直接当做普通属性调用不加括号
+          // 任何data中数据变化立即重新计算
+          // 计算属性会缓存
+          reversedMessage: {
+            get() {
+              return this.time.getFullYear() + '年' + (this.time.getMonth() + 1) + '月' + this.time.getDate() + '日'
+            }
+          },
+          dataPrint: function() {
+            let dt = this.time
+            let y = dt.getFullYear()
+            let m = (dt.getMonth() + 1).toString().padStart(2, '0')
+            let d = dt
+              .getDate()
+              .toString()
+              .padStart(2, '0')
+            return `${y}年${m}月${d}日`
+          },
+          numPrint: function() {
+            let length = this.text.length
+            return `文本总长度${length}`
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

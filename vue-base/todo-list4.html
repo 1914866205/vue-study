@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content="Vue.js学习" />
+    <meta name="description" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-status-bar-style" content="black" />
+
+    <title>封装todolist和todoitem组件，通过slot插槽进行内容分发</title>
+    <style>
+      li {
+        list-style: none;
+      }
+      .jdt {
+        height: 40px;
+        background-color: coral;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <h3>{{message}}</h3>
+        <input v-model="itemData" type="text" @keyup.enter="addItem" />
+        <!-- 使用自定义标签 -->
+        <h2>完成进度{{this.pen}}</h2>
+        <div class="jdt" v-bind:style="{width: this.pen + '%'}"></div>
+
+        <todo-item
+          v-for="item in list"
+          :id="item.id"
+          :title="item.title"
+          :finished="item.finished"
+          :key="item.id"
+          :icon="item.icon"
+          :icon2="item.icon2"
+          @item-finish="handleFinish"
+        >
+          <template v-slot:pre-icon="{value}">
+            <!-- 用上面传下来的value -->
+            <img :src="value" />
+          </template>
+          <template v-slot:end-icon="{value}">
+            <!-- 用上面传下来的value -->
+            <img :src="value" />
+          </template>
+
+          <!-- <template v-slot:end-title="{id} ">
+            <span>({{id}}</span>
+          </template> -->
+
+          <template v-slot:pre-text="{value}">
+            <span>({{value}})</span>
+          </template>
+        </todo-item>
+      </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      //定义todo-item组件
+      Vue.component('todo-item', {
+        props: {
+          id: Number,
+          title: String,
+          finished: Boolean,
+          icon: String,
+          icon2: String
+        },
+        template: `
+            <li>
+                <slot name="pre-icon" :value="icon"></slot>
+                <span v-if="!finished">{{title}}</span>
+                <span v-else style="text-decoration:line-through">{{title}}</span>
+                <button v-show="!finished" @click="handleClick">结束</button>
+                <slot name="end-icon" :value="icon2"></slot>
+               <slot name="pre-text" :value="title"></slot>
+            </li>
+            `,
+        methods: {
+          handleClick(e) {
+            console.log('结束当前按钮')
+            this.$emit('item-finish', this.id)
+          }
+        }
+      })
+
+      //定义todo-item组件
+      Vue.component('todo-list', {
+        props: {
+          title: String
+        },
+        template: `
+              <ul>
+              <h3>{{title}}</h3>
+              <slot></slot>
+              </ul>
+
+            `
+      })
+
+      //Vue的定义
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          message: '封装item组件，传递自定义事件',
+          pen: 0,
+          no: 0,
+          activeColor: 'red',
+          fontSize: 10,
+          itemData: '',
+          list: [
+            {
+              id: 1,
+              title: '语文',
+              finished: false,
+              icon: './image/xiaoxi.png',
+              icon2: './image/jia.png'
+            },
+            {
+              id: 2,
+              title: '数学',
+              finished: true,
+              icon: './image/sousuo.png',
+              icon2: './image/jia.png'
+            },
+            {
+              id: 3,
+              title: '英语',
+              finished: false,
+              icon: './image/wo.png',
+              icon2: './image/jia.png'
+            }
+          ]
+        },
+        methods: {
+          handleFinish(value) {
+            console.log(value)
+            this.list.map(v => {
+              if (v.id === value) {
+                v.finished = true
+              }
+            })
+            this.no++
+            this.pen = (this.no / this.list.length) * 100
+          },
+          addItem() {
+            let idd = this.list[this.list.length - 1]
+            let item = {
+              id: idd + 1,
+              title: this.itemData,
+              finished: false,
+              icon: './image/xiaoxi.png',
+              icon2: './image/jia.png'
+            }
+            this.list.push(item)
+            this.itemData = ''
+          }
+        },
+        created() {
+          for (let i = 0; i < this.list.length; i++) {
+            if (this.list[i].finished === true) {
+              this.no++
+            }
+          }
+          this.pen = (this.no / this.list.length) * 100
+        }
+      })
+    </script>
+  </body>
+</html>

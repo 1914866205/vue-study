@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+      .page {
+        background-color: #f6f6f6;
+        border-radius: 30px;
+      }
+      .front{
+
+      }         
+      .foot{
+        position: relative;
+        width: 100%;
+        height: 20%;
+        bottom: 0px ;
+      }
+      .total{
+        position: relative;
+        background-color: #f6f6f6;
+        width: 100%;
+      }
+      .info{
+        background-color:white;
+        margin-bottom: 3%;
+        
+      }
+      .left{
+        width: 32%;
+      }
+      .right{
+        position: absolute;
+        width: 60%;
+        margin-left: 40%;
+        margin-top: -60%;
+
+      }
+      .money{
+        position: relative;
+        padding-top: 80%;
+        color: red;
+        width: 900;
+        font-size: larger;
+
+      }
+      .number{
+        position:relative;
+        font-size: larger;
+        width: auto;
+        padding-left: 50%;
+      }
+      .result{
+      display: inline-block;
+      padding: 3px 8px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 10px;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 1px 3pxrgba(0,0,0,.5);
+    text-shadow: 0 -1px 1px rgba(0,0,0,.25);
+    vertical-align: middle;
+    color:#fff !important;
+    border: none !important;
+    background-color: #e33100;
+    width: 100px;
+    height: 40px;
+    margin-left: 75%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+} 
+      .resultmoney{
+        position: absolute;
+        font-size: 18px;
+        color: red;
+        margin-left: 15%;
+        margin-top: 18px;
+      }
+      .resultmoneymessage{
+        position: absolute;
+        font-size: 18px;
+        color: red;
+        margin-left: 5%;
+        margin-top: 18px;
+      }
+    </style>
+    <title>购物车</title>
+  </head>
+  <body>
+    <div id="app">
+      <div >
+        <img class="front" src="./image/front.png" width="100%" height="23%"></img>
+        <div class="page">
+          <ul>
+
+            <li v-for="(item,index) in shops" :key="item.title">
+              <div class="info">
+                <img class="left" :src="item.shopImg" style="border-radius: 20px;"/>
+                <div class="right">
+                  <span>
+                    {{item.title}}
+                  </span>
+                  <p class="money">
+                    ￥{{item.price}}
+                  </p>
+                  <div class="number">
+                    <button style="width: 40px;" @click="add(item)">+</button>
+                    <input style="width: 40px;text-align: center;" type="text" id="index"  v-model="item.number"/>
+                    <button style="width: 40px;" @click="del(item)">-</button>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+        <div class="total">
+          <label class="resultmoneymessage">￥{{moneyresult}}</label>
+          <label class="resultmoney">{{result}}</label>  
+          <button class="result" @click="getResult()">结算</button>
+        </div>
+        <img class="foot" src="./image/foot.png" ></img>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      let vm = new Vue({
+        //把vue对象挂载到id为app
+        el: '#app',
+        data: {
+          result:"",
+          moneyresult:612,  
+          // num:[1,1,1],
+          shops: [
+            {
+              title: '花花公子秋冬外套',
+              price: 159,
+              shopImg: './image/c2.png',
+              number: 1
+            },
+            {
+              title: '2019秋冬新款加厚袖口补丁毛衣',
+              price: 125,
+              shopImg: './image/c1.png',
+              number: 1
+            },
+            {
+              title: '笑涵阁 柔软舒适CHAO幼马海',
+              price: 328,
+              shopImg: './image/c3.png',
+              number: 1
+            }
+          ],
+        },methods: {
+          add(item){
+            item.number ++
+            this.moneyresult += item.number * item.price
+          },
+          del(item){
+            if(item.number-1>0){
+              item.number -= 1
+              this.moneyresult += item.number * item.price
+            }
+          },
+          getResult(){
+            let shopnum=0;
+            for(let i=0;i<this.shops.length;i++){
+              shopnum+=this.shops[i].number
+            }
+            this.result="您本次买了"+shopnum+"件商品，共消费"+this.moneyresult+"元"
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

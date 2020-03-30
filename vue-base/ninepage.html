@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content="Vue.js学习" />
+    <meta name="description" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-status-bar-style" content="black" />
+
+    <title>九宫格</title>
+    <style>
+      body {
+        font-size: 62.5%;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: #f6f6f6;
+        margin: 0;
+        padding: 0;
+        font-size: 1rem;
+      }
+      .viewport {
+        max-width: 640px;
+        min-width: 300px;
+        margin: 0 auto;
+      }
+
+      .container {
+        width: 90%;
+        margin: 0 auto;
+      }
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3rem;
+        text-align: center;
+        line-height: 3rem;
+        background-color: #f6f6f6;
+        color: #fff;
+      }
+      .main {
+        background-color: #f6f6f6;
+        margin-top: 3.5rem;
+      }
+      .bottom {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        margin-left: -26px;
+        height: 4rem;
+        line-height: 4rem;
+        background-color: #f44336;
+        border-top: solid 1px black;
+      }
+      .bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .bottom ul li {
+        position: relative;
+        display: inline;
+        list-style: none;
+        text-align: center;
+        font-size: 25px;
+        flex: 1 1 25%;
+        color: floralwhite;
+        background-color: #009688;
+        border-radius: 10px;
+        margin-right: 60px;
+      }
+      .bottom ul li ::selection {
+        background: yellow;
+      }
+      .main {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .list-item {
+        width: 30%;
+        margin-right: 3.3%;
+        height: 4.5rem;
+        color: whitesmoke;
+        line-height: 4.5rem;
+        text-align: center;
+        margin-top: 1.5rem;
+        background-color: #e91e63;
+        border-radius: 10px;
+      }
+          
+          
+      .list-item2 {
+        width: 30%;
+        margin-right: 3.3%;
+        height: 4.5rem;
+        color: whitesmoke;
+        line-height: 4.5rem;
+        text-align: center;
+        margin-top: 1.5rem;
+        background-color: #795548;
+        border-radius: 10px;
+      }    
+      
+      .list-mm {
+        width: 9%;
+        margin-right: 1%;
+        height: 0.5rem;
+        color: whitesmoke;
+        line-height: 0.5rem;
+        text-align: center;
+        margin-top: 0.5rem;
+        background-color: #e91e63;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="header">
+          <img src="./image/head1.jpg" width="100%" height="auto" />
+        </div>
+        <div class="main">
+          <div v-for="(item,index) in ninelist" :key="index" class="list-item">
+            {{item}}
+          </div>
+          <!-- <div v-for="(item,index) in list" :key="index" class="list-mm"> -->
+            <!-- {{item}} -->
+          <!-- </div> -->
+          <!-- <div v-for="(item,index) in itemsmall" :key="index" class="list-mm">
+              {{item}}
+            </div> -->
+            <h2 style="margin-top: 50px;margin-left: 33%;width: 100%;">{{message}}</h2>
+            <toto v-for="item in list" :title="item.title" :finished="item.finished" class="list-item2">   
+                {{item.title}}
+            </toto>
+            </ul>
+        </div>
+        <div class="bottom">
+          <ul>
+            <li>微淘</li>
+            <li>消息</li>
+            <li>购物车</li>
+            <li>我的</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      Vue.component('todo', {
+        props: {
+          title: String,
+          finished: {
+            type: Boolean,
+            default: false
+          }
+        }
+        ,
+        template: `
+            <li>
+                <span v-if="!finished">{{title}}</spab>
+                <span v-else style="text-decoration: line-throuth">{{title}}</span>
+                <button v-show="!finished">删除</button>
+            </li>
+        `
+      })
+      let meatData = {
+        name: 'soft1851'
+      }
+      //   vue model
+      let vm = new Vue({
+        //把vue对象挂载到id为app
+        el: '#app',
+        data: {
+          message: '封装toto组件',
+          ninelist: [
+            '天猫新品',
+            '今日爆款',
+            '天猫国籍',
+            '饿了吗',
+            '天猫超市',
+            '充值中心',
+            '机票酒店',
+            '领淘金币',
+            '饿了吗'
+          ],
+          itemsmall: [],
+          list: [
+            {
+              id:1,
+              title: '身高180',
+              finished: false
+            },
+            {
+              id:2,
+              title: '体重180',
+              finished: true
+            },
+            {
+              id:3,
+              title: '女',
+              finished: false
+            }
+          ]
+        },
+        create() {
+          for (let i = 0; i < 100; i++) {
+            this.itemsmall.push('i')
+            alert(i)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

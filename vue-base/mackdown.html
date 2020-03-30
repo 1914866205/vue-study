@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content="Vue.js学习" />
+    <meta name="description" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-status-bar-style" content="black" />
+    <!-- <link rel="shortcut icon" href="" -->
+    <title>MarkDown Demo</title>
+    <style>
+      html,
+      body,
+      #editor {
+        margin: 0;
+        height: 100%;
+        font-family: 'Helvetica Neue';
+        color: #333;
+      }
+
+      textarea,
+      #editor div {
+        display: inline-block;
+        width: 49%;
+        height: 100%;
+        vertical-align: top;
+        box-sizing: border-box;
+        padding: 0 20px;
+      }
+
+      textarea {
+        border: none;
+        border-right: 1px solid #ccc;
+        resize: none;
+        outline: none;
+        background-color: #2a333c;
+        color: #ddd;
+        font-family: 'Monaco', courier, monospace;
+        padding: 20px;
+      }
+
+      code {
+        color: #ccc;
+        font-size: 18px;
+        background-color: #282c34;
+        display: block;
+        width: 100%;
+        border-radius: 5px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="editor">
+      <textarea :value="input" @input="update"></textarea>
+      <div v-html="compiledMarkdown"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      //Vue的定义
+      const vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        created() {}
+      })
+    </script>
+  </body>
+</html>

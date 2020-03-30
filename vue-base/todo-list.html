@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>todol-list练习</title>
+    <style>
+      li{
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <ul> -->
+        <!-- <li v-for="(item,index) in list" :key="index"> -->
+
+          <!-- 未完成任务 正常显示 -->
+          <!-- <span v-if="!item.finished"> -->
+            <!-- {{item.title}} -->
+          <!-- </span> -->
+
+          <!-- 已经结束任务  划掉 -->
+          <!-- <span -->
+            <!-- v-else -->
+            <!-- style="text-decoration: line-through;color:grey;cursor: pointer;" -->
+            <!-- @click="item.finished=!item.finished" -->
+          <!-- > -->
+            <!-- {{item.title}} -->
+          <!-- </span> -->
+
+          <!-- 结束任务按钮，用来切换每个任务的finish -->
+          <!-- <button v-show="!item.finished" @click="item.finished=!item.finished">结束任务</button> -->
+        <!-- </li> -->
+          <!-- </ul> -->
+
+
+
+      <h4>复选框</h4>
+      <ul>
+        <li v-for="(item,index) in list" :key="index">
+
+          <input type="checkbox" :id="item.title" :value="item.title" v-model="checkedNames"></input>
+             <!-- 未完成任务 正常显示 -->
+          <span v-if="!item.finished">
+            {{item.title}}
+          </span>
+
+          <!-- 已经结束任务  划掉 -->
+          <span
+            v-else
+            style="text-decoration: line-through;color:grey;cursor: pointer;"
+            @click="item.finished=!item.finished"
+          >
+            {{item.title}}
+          </span>
+
+          <!-- 结束任务按钮，用来切换每个任务的finish -->
+          <button v-show="!item.finished" @click="item.finished=!item.finished">结束任务</button>
+        </li>
+        <!-- <button  @click="selected.finished=true">一键开始任务</button> -->
+        <button  @click="finishAll()">批量结束</button>
+      </ul>
+
+      <button  @click="showunfinish=!showfinish">显示未完成</button>
+      <ul v-show="showunfinish">
+        <li v-for="(item,index) in list" :key="index">
+             <!-- 未完成任务 正常显示 -->
+          <span v-if="!item.finished">
+            {{item.title}}
+          </span>
+        </li>
+      </ul>
+
+      <button  @click="showfinish=!showfinish">显示完成</button>
+      <ul v-show="showfinish">
+        <li v-for="(item,index) in list" :key="index">
+             <!-- 未完成任务 正常显示 -->
+          <span v-if="item.finished">
+            {{item.title}}
+          </span>
+        </li>
+      </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      //   vue model
+      let vm = new Vue({
+        //把vue对象挂载到id为app
+        el: '#app',
+        data: {
+          checkedNames:[],
+          showfinish:false,
+          showunfinish:false,
+          list: [
+            {
+              title: 'HTML',
+              finished: true
+            },
+            {
+              title: 'JavaScript',
+              finished: false
+            },
+            {
+              title: 'Vue',
+              finished: true
+            }
+          ]
+        },
+        methods: {
+           finishAll(){
+             //要现在大数组里找，有没有和选中的title相同
+             //不能仅仅靠索引变化
+             //要加:id
+             //否则就一直是选一个全选
+            for(let j=0;j<this.list.length;j++){
+            for(let i=0;i<this.checkedNames.length;i++){
+                if(this.checkedNames[i]==this.list[j].title){
+                    this.list[j].finished=true;
+                }
+            }
+            }
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

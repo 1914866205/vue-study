@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue起步练习</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>{{data.name}}{{data.info}}</div>
+
+      <div v-bind:id="data.name">
+        v-bind操作 {{data.name}}{{data.info}}
+      </div>
+      <span :title="message">鼠标悬停一下，查看动态绑定的信息{{data.message}}</span>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      let meatData = {
+        name: 'soft1851',
+        info: 'Vue学习'
+      }
+      //   vue model
+      let vm = new Vue({
+        //把vue对象挂载到id为app
+        el: '#app',
+        data: {
+          data: meatData,
+          message: '当前系统时间是：' + new Date().toLocaleTimeString()
+        }
+      })
+    </script>
+  </body>
+</html>

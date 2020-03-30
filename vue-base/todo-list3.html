@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content="Vue.js学习" />
+    <meta name="description" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-status-bar-style" content="black" />
+
+    <title>封装item组件，传递自定义事件</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <p>{{message}}</p>
+        <input type="text" />
+        <!-- 使用自定义标签 -->
+        <todo-item
+          v-for="item in list"
+          :id="item.id"
+          :title="item.title"
+          :finished="item.finished"
+          :key="item.id"
+          @item-finish="handleFinish"
+        >
+        </todo-item>
+      </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      //定义todo-item组件
+      Vue.component('todo-item', {
+        props: {
+          id: Number,
+          title: String,
+          finished: Boolean
+        },
+        template: `
+            <li>
+                <span v-if="!finished">{{title}}</span>
+                <span v-else style="text-decoration:line-through">{{title}}</span>
+                <button v-show="!finished" @click="handleClick">结束</button>
+            </li>
+            `,
+        methods: {
+          handleClick(e) {
+            console.log('结束当前按钮')
+            // this.$emit('item-finish', this.id)
+          }
+        }
+      })
+      //Vue的定义
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          message: '封装item组件，传递自定义事件',
+          list: [
+            {
+              id: 1,
+              title: '课程1',
+              finished: false
+            },
+            {
+              id: 2,
+              title: '课程2',
+              finished: true
+            },
+            {
+              id: 3,
+              title: '课程3',
+              finished: false
+            },
+            {
+              id: 4,
+              title: '课程4',
+              finished: true
+            },
+            {
+              id: 5,
+              title: '课程5',
+              finished: false
+            }
+          ]
+        },
+        methods: {
+          handleFinish(value) {
+            console.log(value)
+            this.list.map(v => {
+              if (v.id === value) {
+                v.finished = true
+              }
+            })
+          },
+          addItem() {
+            let idd = this.list[this.list.length]
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

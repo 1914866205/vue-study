@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content="Vue.js学习" />
+    <meta name="description" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-status-bar-style" content="black" />
+
+    <title>过滤器</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>计算属性</h1>
+      <button @click="z++">中国队进球+1</button>
+      <button @click="h++">韩国队进球+1</button>
+      <p>中国队{{z}}</p>
+      <p>韩国队{{h}}</p>
+      <p>时间{{time}}</p>
+      <p>战况{{zk}}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          time: 0,
+          z: 0,
+          h: 0
+        },
+        created() {
+          const time = setInterval(() => {
+            this.time = this.time + 1
+            if (this.time == 5) {
+              clearInterval(time)
+            }
+          }, 1000)
+        },
+        methods: {
+          clock() {
+            this.time = this.time + 1
+            alter(this.time)
+          }
+        },
+        computed: {
+          // 直接当做普通属性调用不加括号
+          // 任何data中数据变化立即重新计算
+          // 计算属性会缓存
+          zk: function() {
+            let result = this.z - this.h
+            if (this.time < 5) {
+              if (result == 0) {
+                return `双方正在僵持`
+              } else if (result < 0) {
+                return `韩国暂时领先`
+              } else {
+                return `中国暂时领先`
+              }
+            } else {
+              if (result == 0) {
+                return `平局`
+              } else if (result < 0) {
+                return `韩国赢`
+              } else {
+                return `中国赢`
+              }
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

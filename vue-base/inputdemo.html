@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>表单元素练习</title>
+    <style>
+     
+.radio{
+    display: inline-block;
+    position: relative;
+    line-height: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.radio input{
+    display: none;
+}
+.radio .radio-bg{
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    margin-right: 5px;
+    padding: 0;
+    background-color: #45bcb8;
+    border-radius: 100%;
+    vertical-align: top;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.radio .radio-on{
+    display: none;
+}
+.radio input:checked + span.radio-on{
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 100%;
+    background: #FFFFFF;
+    top: 4px;
+    left: 4px;
+    background-image: linear-gradient(#ffffff 0, #e7e7e7 100%);
+      : scale(0, 0);
+    transition: all 0.2s ease;
+    transform: scale(1, 1);
+    display: inline-block;
+}
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h4>文本框</h4>
+      <input v-model="inputInfo" type="text" />
+      <span>{{inputInfo}}</span>
+      <h4>数字</h4>
+      <input v-model="numData" type="number" />
+      <span>{{numData}}</span>
+      <h4>日期输入框</h4>
+      <input v-model="dataInfo" type="date" />
+      <span>{{dataInfo}}</span>
+      <span>{{dataInfo}}</span>
+
+    <h4>单选按钮要美化</h4>
+      <label class="radio">
+        <span class="radio-bg"></span>
+        <input type="radio" name="" id="one" value="one" v-model="checked" />one
+        <span class="radio-on"></span>
+      </label>
+      
+      
+      <label class="radio">
+        <span class="radio-bg"></span>
+        <input type="radio" name="" id="two" value="two" v-model="checked" />two
+        <span class="radio-on"></span>
+      </label>
+        <!-- <label for="two">第二个</label> -->
+        <span>选择了：{{checked}}</span>
+        
+      <h4>复选框</h4>
+      <input type="checkbox"  id="e1" value="跑步" v-model="PE">跑步</input>
+      <input type="checkbox"  id="e2" value="打球" v-model="PE" >打球</input>
+      <span>PE:{{PE}}</span>
+
+      <h4>下拉框</h4>
+      <select name="" id="input" v-model="selected">
+        <option value="one">-- Select One --</option>
+        <option value="two">-- Select Two --</option>
+        <option value="three">-- Select Three --</option>
+        <option value="four">-- Select Four --</option>
+      </select>
+      <span>选择了：{{selected}}</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      //   vue model
+      let vm = new Vue({
+        //把vue对象挂载到id为app
+        el: '#app',
+        data: {
+          inputInfo: '',
+          numData: null,
+          dataInfo: null,
+          checked: true,
+          selected: '未选择',
+          PE:[]
+        }
+      })
+    </script>
+  </body>
+</html>
