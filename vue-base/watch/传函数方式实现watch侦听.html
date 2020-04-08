@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="shortcut icon"
+      href="https://niit-soft.oss-cn-hangzhou.aliyuncs.com/icon/icons8_storage.ico"
+      type="image/x-icon"
+    />
+    <title>使用watch的函数传递实现</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="count+=1">点击加1</button>
+      <button @click="count+=0">点击无变化</button>
+      <button @click="randomAdd">随机加50以内随机数</button>
+      <h3>{{count}}</h3>
+      <h4>{{list}}</h4>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          count: 1,
+          list: []
+        },
+        methods: {
+          randomAdd: function() {
+            this.count = Math.floor(Math.random() * 50) + 1
+          }
+        },
+        watch: {
+          //监控的属性的名字
+          //count() {
+          //只有当count的值发送变化才会进到这个函数
+          //console.log('count改变' + this.count)
+          //this.list.push(this.count)
+          //}
+          count: {
+            handler(newValue, oldValue) {
+              this.list.push(this.count)
+            },
+            immediate: true
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

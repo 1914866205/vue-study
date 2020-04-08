@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="shortcut icon"
+      href="https://niit-soft.oss-cn-hangzhou.aliyuncs.com/icon/icons8_storage.ico"
+      type="image/x-icon"
+    />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .item {
+      background-color: rgb(71, 148, 105);
+      color: #fff;
+      height: 150px;
+      margin-bottom: 10px;
+    }
+    .fixed {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      padding-top: 200px;
+      font-size: 200px;
+    }
+    .fixed2 {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      margin-left: -50%;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <center>
+        <!-- <h2 v-if="show" v-bind:class="{fixed : show}">修复中...</h2> -->
+        <h2 ref="items" v-if="show" v-bind:class="{fixed : show}">
+          修复中...
+          <p>{{this.num}}</p>
+        </h2>
+        <img v-if="!show" src="../image//sj.jpeg" width="100%" height="100%" v-bind:class="{fixed2 : !show}" />
+      </center>
+
+      <div v-for="(item,index) in list" :key="index" class="item">{{item}}</div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          show: true,
+          list: [],
+          position: 0,
+          num: 0
+        },
+        created() {
+          for (let i = 1; i <= 30; i++) {
+            this.list.push('item' + i)
+          }
+        },
+        mounted() {
+          //等到页面产生滚动才执行监听
+          this.$nextTick(function() {
+            window.addEventListener('scroll', this.onScroll)
+          })
+        },
+        methods: {
+          onScroll() {
+            let scrolled = document.documentElement.scrollTop || document.body.scrollTop
+            this.show = scrolled <= 3800
+            this.handleColor(scrolled)
+          },
+          handleColor(scrolled) {
+            let r = Math.ceil(Math.random() * 255)
+            let g = Math.ceil(Math.random() * 255)
+            let b = Math.ceil(Math.random() * 255)
+            let a = Math.ceil(Math.random() * 1)
+            let color = `rgba(${r},${g},${b},${a})`
+            console.log(scrolled / 4200)
+            this.num = scrolled / 37
+            this.$refs.items.style.backgroundColor = color
+          }
+        },
+        watch: {
+          position: 'onScroll'
+        }
+      })
+    </script>
+  </body>
+</html>

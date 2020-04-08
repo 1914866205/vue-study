@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="shortcut icon"
+      href="https://niit-soft.oss-cn-hangzhou.aliyuncs.com/icon/icons8_storage.ico"
+      type="image/x-icon"
+    />
+    <title>传字符串方式实现watch侦听</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+        <!-- 双向绑定                                                 键盘监听-->
+        <input type="text" placeholder="please input" v-model.lazy="count"/>
+      <!-- <input type="text"
+      placeholder="please input" 
+      :value="count"
+      @keyUp.enter="handleEnter($event)"
+      /> -->
+      <!-- //传的是事件 -->
+    </hr>
+      <h4>count:{{count}}</h4>
+      <h4>square:{{square}}</h4>
+    </div>  
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: { count: 1, square: 1 },
+        watch: {
+          //只侦听字符串
+          count: 'handleChange'
+          //count:'handleEnter'
+        },
+        methods: {
+          handleChange() {
+            //通过文本框的输入把文本框的值传给count
+            console.log('count改变了:' + this.count)
+            this.square=this.count*this.count
+          },
+          handleEnter(event){
+            console.log(event.target.value)
+            this.count=event.target.value
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

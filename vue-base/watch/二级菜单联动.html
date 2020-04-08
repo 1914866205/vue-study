@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="shortcut icon"
+      href="https://niit-soft.oss-cn-hangzhou.aliyuncs.com/icon/icons8_storage.ico"
+      type="image/x-icon"
+    />
+    <title>watch实例——二级联动菜单</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <style>
+    .box {
+      width: 150px;
+      height: 150px;
+      background-color: rgb(86, 168, 137);
+    }
+    .btn{
+      position: absolute;
+      margin-left: 100px;
+      margin-top: -40px;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <h3>菜单</h3>
+      <div ref="box" class="box">{{count}}个菜单项</div>
+  </hr>
+  <div v-for="(menu,index) in menus" :key="index">
+    <h4>{{menu.name}}:{{menu.subMenus.length}}</h4>      
+    <input type="text" placeholder="输入一个新的菜单项"
+    v-model.lazy="temp"
+    @keyUp.enter="handleSubMen(index)"
+    />
+    <div v-for="(subMenu,index) in menu.subMenus" :key="index">
+      <p v-show="subMenu.show">
+        {{subMenu.name}}
+      </p>
+      <button class="btn" v-show="subMenu.show" @click="subMenu.show=!subMenu.show">隐藏</button>
+    </div>
+</div>
+    </div>
+</div>
+    <script>
+      
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          count: 9,
+          temp:'',
+          menus: [
+          {
+              id:1,
+              name:'文件',
+              subMenus:[{
+                name:'新建',
+                show:true
+              },{
+                name:'打开',
+                show:true
+              },{
+                name:'保存',
+                show:true
+              }]
+          }, {
+            id:2,
+            name:'文件',
+            subMenus:[{
+              name:'剪切',
+              show:true
+            },{
+              name:'复制',
+              show:true
+            },{
+              name:'粘贴',
+              show:true
+            }]
+          }, {
+            id:3,
+            name:'文件',
+            subMenus:[{
+              name:'命令',
+              show:true
+            },{
+              name:'扩展',
+              show:true
+            },{
+              name:'主题',
+              show:true
+            }]
+          }]
+        },
+        methods: {
+          handleSubMen(index) {
+            console.log('子菜单改变了')
+            console.log(JSON.stringify(this.menus[index].subMenus))
+            let temp2={'name':this.temp,'show':true}
+            this.menus[index].subMenus.push(temp2)
+            console.log(this.menus[index])
+       //     <!-- this.menus[index].subMenus[this.menus[index].subMenus.length].show=true -->
+            this.count++
+            //颜色的变化
+            this.handleColor()
+          },
+          handleColor() {
+            let r = Math.ceil(Math.random() * 255)
+            let g = Math.ceil(Math.random() * 255)
+            let b = Math.ceil(Math.random() * 255)
+            let a = Math.ceil(Math.random() * 1)
+            let color = `rgba(${r},${g},${b},${a})`
+            console.log(color)
+            this.$refs.box.style.backgroundColor = color
+          }
+        },
+        watch: {
+            menus: 'handleSubMen',
+          deep: true
+        }
+      })
+    </script>
+  </body>
+</html>
