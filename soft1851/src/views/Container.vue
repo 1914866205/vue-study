@@ -1,12 +1,22 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/home/card">卡片视图</router-link>|
-      <router-link to="/home/list">列表视图</router-link>|
-      <router-link to="/welcome">欢迎页面</router-link>
-    </div>
+  <el-tabs type="border-card">
+    <el-tab-pane>
+      <span slot="label">
+        <router-link to="/welcome">欢迎页面</router-link>
+      </span>
+    </el-tab-pane>
+    <el-tab-pane label="卡片视图">
+      <span slot="label">
+        <router-link to="/home/card">卡片视图</router-link>
+      </span>
+    </el-tab-pane>
+    <el-tab-pane label="列表视图">
+      <span slot="label">
+        <router-link to="/home/list">列表视图</router-link>
+      </span>
+    </el-tab-pane>
     <router-view />
-  </div>
+  </el-tabs>
 </template>
 
 <script>
@@ -18,10 +28,20 @@ export default {
   components: {},
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+    // 跳转页面方法
+    goHome() {
+      alert('ss')
+      // this.$router.push('/home/list')
+    }
+  },
   computed: {}
 }
 </script>
 
 <style scoped lang="scss">
+* {
+  border: 0;
+  padding: 0;
+}
 </style>
