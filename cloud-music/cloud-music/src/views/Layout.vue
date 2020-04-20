@@ -39,52 +39,60 @@
         <v-container style="height: 1px;"></v-container>
       </v-sheet>
     </v-card>
-    <v-container class="box">
-      <div
-        class="row"
-        style="margin-bottom: 24px;"
-      >
-      </div>
-      <at-menu
-        theme="dark"
-        :mode="mode"
-        active-name="0"
-      >
-
-        <at-submenu
-          v-for="item in items"
-          :key="item.title"
-          link
+    <v-col cols="3">
+      <div class="box">
+        <div
+          class="row"
+          style="margin-bottom: 24px;"
         >
-          <template
-            slot="title"
-            v-if="item.subMenus.length === 0"
-          >
-            <!-- <router-link> -->
-            {{item.title}}
-            <!-- </router-link> -->
-          </template>
+        </div>
+        <at-menu
+          theme="dark"
+          :mode="mode"
+          active-name="0"
+        >
 
-          <template
-            slot="title"
-            v-else
-          >
-            {{item.title}}
-
-          </template>
-          <at-menu-item
-            v-for="(menu,i) in item.subMenus"
-            :key='i'
+          <at-submenu
+            v-for="item in items"
+            :key="item.title"
             link
           >
-            <!-- <router-link :to="menu.url"> -->
-            {{menu.title}}
-            <!-- </router-link> -->
-          </at-menu-item>
+            <template
+              slot="title"
+              v-if="item.subMenus.length === 0"
+            >
+              <!-- <router-link> -->
+              {{item.title}}
+              <!-- </router-link> -->
+            </template>
 
-        </at-submenu>
-      </at-menu>
-    </v-container>
+            <template
+              slot="title"
+              v-else
+            >
+              {{item.title}}
+
+            </template>
+            <at-menu-item
+              v-for="(menu,i) in item.subMenus"
+              :key='i'
+              link
+            >
+              <!-- <router-link :to="menu.url"> -->
+              {{menu.title}}
+              <!-- </router-link> -->
+            </at-menu-item>
+
+          </at-submenu>
+        </at-menu>
+      </div>
+    </v-col>
+    <v-col
+      cols="9"
+      class="box"
+    >
+      <router-view />
+    </v-col>
   </div>
 </template>
 <script>
@@ -126,11 +134,15 @@ export default {
 .box {
   margin-top: 80px;
   float: left;
+  margin-right: 180px;
 }
 .cloud-title {
   margin: 40px;
   color: black;
   font-weight: 900;
   font-size: 26;
+}
+.show {
+  margin-left: 100px;
 }
 </style>
