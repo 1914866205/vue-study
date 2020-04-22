@@ -28,6 +28,19 @@
           ></mu-text-field>
         </mu-form-item>
         <mu-form-item
+          label="验证码"
+          prop="checkcode"
+          :rules="checkcodeRules"
+        >
+          <mu-text-field
+            v-model="validateForm.checkcode"
+            prop="checkcode"
+          ></mu-text-field>
+        </mu-form-item>
+        <mu-form-item>
+          <img ref="verifyImg">
+        </mu-form-item>
+        <mu-form-item
           prop="isAgree"
           :rules="argeeRules"
         >
@@ -36,6 +49,7 @@
             v-model="validateForm.isAgree"
           ></mu-checkbox>
         </mu-form-item>
+
         <mu-form-item>
           <mu-button
             color="primary"
@@ -60,12 +74,14 @@
     </mu-container>
   </div>
 </template>
-
+<!-- 获取本地ip地址  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>-->
 <script>
 export default {
   name: 'Login',
   data() {
     return {
+      verifyImg: '',
+      userIp: '',
       usernameRules: [
         { validate: (val) => !!val, message: '必须填写用户名' },
         { validate: (val) => val.length >= 3, message: '用户名长度大于3' }
@@ -78,16 +94,47 @@ export default {
       validateForm: {
         username: '',
         password: '',
-        isAgree: false
+        isAgree: false,
+        // 获取本地ip地址
+        // userIp: document.write(returnCitySN['cip'])
+        userIp: '',
+        checkcode: ''
       },
       menuList: [],
       openSimple: false
     }
   },
   components: {},
-  created() {},
-  mounted() {},
+  created() {
+    this.$axios({
+      method: 'get',
+      url: 'http://pv.sohu.com/cityjson?ie=utf-8'
+    }).then((res) => {
+      this.userIp = res.data.split('"')[3]
+      // alert(this.userIp)
+    })
+  },
+  mounted() {
+    // this.init()
+  },
   methods: {
+    // 获取验证码
+    init() {
+      this.validateForm.userIp = this.userIp
+      if (this.userIp.length > 0) {
+        this.$axios({
+          method: 'post',
+          url: 'http://localhost:8080/captcha',
+          data: {
+            userIp: this.userIp
+          }
+        }).then((res) => {
+          let img = this.$refs.verifyImg
+          let url = window.URL.createObjectURL(res.data)
+          img.src = url
+        })
+      }
+    },
     openSimpleDialog() {
       this.openSimple = true
     },
@@ -97,42 +144,42 @@ export default {
     submit() {
       this.$refs.form.validate().then((result) => {
         console.log('form valid: ', result)
-        //模拟后端接口数据
-        let user = {
-          userId: '1802343210',
-          username: 'ntt',
-          userRole: 'admin',
-          avatar:
-            'https://avatars3.githubusercontent.com/u/58495771?s=460&u=bb2f820d0cb11cf18fa5a2c787261db55023c0cc&v=4'
-        }
-        this.menuList = [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard', url: '/dashboard', subMenus: [] },
-          {
-            title: '音乐管理',
-            icon: 'mdi-music',
-            url: '',
-            subMenus: [
-              {
-                title: '歌单管理',
-                icon: 'mdi-domain',
-                url: '/music-list',
-                permissions: []
-              },
-              {
-                title: '歌曲管理',
-                icon: 'mdi-text',
-                url: '/music',
-                permissions: ['music:add', 'music:edit', 'music:delete']
-              }
-            ]
-          },
-          { title: 'About', icon: 'mdi-help-box', url: '/about', subMenus: [] }
-        ]
+        // //模拟后端接口数据
+        // let user = {
+        //   userId: '1802343210',
+        //   username: 'ntt',
+        //   userRole: 'admin',
+        //   avatar:
+        //     'https://avatars3.githubusercontent.com/u/58495771?s=460&u=bb2f820d0cb11cf18fa5a2c787261db55023c0cc&v=4'
+        // }
+        // this.menuList = [
+        //   { title: 'Dashboard', icon: 'mdi-view-dashboard', url: '/dashboard', subMenus: [] },
+        //   {
+        //     title: '音乐管理',
+        //     icon: 'mdi-music',
+        //     url: '',
+        //     subMenus: [
+        //       {
+        //         title: '歌单管理',
+        //         icon: 'mdi-domain',
+        //         url: '/music-list',
+        //         permissions: []
+        //       },
+        //       {
+        //         title: '歌曲管理',
+        //         icon: 'mdi-text',
+        //         url: '/music',
+        //         permissions: ['music:add', 'music:edit', 'music:delete']
+        //       }
+        //     ]
+        //   },
+        //   { title: 'About', icon: 'mdi-help-box', url: '/about', subMenus: [] }
+        // ]
         localStorage.setItem('token', 'EcIHTAWoGrmMVvTu2LPvuL-siq6hAfieVeehl-HTe_M')
-        localStorage.setItem('user', JSON.stringify(user))
+        // localStorage.setItem('user', JSON.stringify(user))
         localStorage.setItem('menuList', JSON.stringify(this.menuList))
         this.$store.commit('setToken', 'EcIHTAWoGrmMVvTu2LPvuL-siq6hAfieVeehl-HTe_M')
-        this.$store.commit('setUser', user)
+        // this.$store.commit('setUser', user)
         this.$store.commit('setMenuList', this.menuList)
         this.$router.push('/')
         this.openSimpleDialog()
@@ -147,7 +194,12 @@ export default {
       }
     }
   },
-  computed: {}
+  computed: {},
+  watch: {
+    userIp: function() {
+      this.init()
+    }
+  }
 }
 </script>
 

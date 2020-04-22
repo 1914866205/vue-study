@@ -61,9 +61,9 @@
               slot="title"
               v-if="item.subMenus.length === 0"
             >
-              <!-- <router-link> -->
-              {{item.title}}
-              <!-- </router-link> -->
+              <router-link>
+                {{item.title}}
+              </router-link>
             </template>
 
             <template
@@ -78,9 +78,9 @@
               :key='i'
               link
             >
-              <!-- <router-link :to="menu.url"> -->
-              {{menu.title}}
-              <!-- </router-link> -->
+              <router-link :to="menu.url">
+                {{menu.title}}
+              </router-link>
             </at-menu-item>
 
           </at-submenu>

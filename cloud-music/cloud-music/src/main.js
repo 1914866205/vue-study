@@ -7,7 +7,11 @@ import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import AtComponents from 'at-ui'
 import 'at-ui-style' // 引入组件样式
-
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+Vue.prototype.$axios = axios
+Vue.use(VueAxios)
+// Vue.use(axios)
 // import 'at-ui-style/src/index.scss'      // 或者引入未构建版本的 scss 样式
 
 Vue.use(AtComponents)
