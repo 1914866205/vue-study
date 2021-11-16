@@ -32,6 +32,47 @@ const routes = [
         path: 'list',
         name: 'List',
         component: () => import('@/views/List.vue')
+      },
+      {
+        path: 'todoList1',
+        name: 'TodoList1',
+        component: () => import('@/views/TodoList1.vue')
+      },
+      {
+        path: 'todoList2',
+        name: 'TodoList2',
+        component: () => import('@/views/TodoList2.vue')
+      },
+      {
+        path: 'todoList3',
+        name: 'TodoList3',
+        component: () => import('@/views/TodoList3.vue')
+      },
+      {
+        path: 'todoList4',
+        name: 'TodoList4',
+        component: () => import('@/views/TodoList4.vue')
+      },
+      {
+        path: 'todoList5',
+        name: 'TodoList5',
+        component: () => import('@/views/TodoList5.vue')
+      },
+      {
+        path: 'todoList6',
+        name: 'TodoList6',
+        component: () => import('@/views/TodoList6.vue')
+      },
+      {
+        path: 'todoList7',
+        name: 'TodoList7',
+        component: () => import('@/views/TodoList7.vue')
+      },
+      
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('@/views/login.vue')
       }
     ]
   },

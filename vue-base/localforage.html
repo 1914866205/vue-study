@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style></style>
+    <title>Localforage</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Hello world</h1>
+    </div>
+    <!-- //引用vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引用loaclforage -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.3/localforage.min.js"></script>
+    <script>
+      let vm = new Vue({
+        //把vue对象挂载到id为app
+        el: '#app',
+        data: {},
+        created() {
+          this.$vlf.createInstance({
+            storeName: 'user',
+          })
+          //存储值
+          this.$vlf.setItem('testKey', 'testValue').then((V) => {
+            console.log(V)
+          })
+        },
+        methods: {},
+      })
+      //强行设置数据仓库后端驱动
+      //列出可选的驱动，以优先级排序
+      //先 INDEXEDDB  后  WEBSQL
+      //   localforage.setDriver([localforage.INDEXEDDB, localforage.WEBSQL])
+      //先 WEBSQL  后 INDEXEDDB
+      //    localforage.setDriver([localforage.WEBSQL, localforage.INDEXEDDB])
+
+      //也可以设置驱动更改优先级
+      localforage.config({
+        // driver: [localforage.WEBSQL, localforage.INDEXEXEDDB, localforage.LOCALSTORAGE],
+        driver: localforage.LOCALSTORAGE,
+        name: 'WebSQL-Rox',
+      })
+
+      //存储值
+      localforage.setItem('mykey', 'myvalue').then((value) => {
+        value === 'myvalue'
+        console.log(value)
+      })
+      //取值
+      localforage.getItem('mykey').then((value) => {
+        value === null //key不存在或者存的是undifined
+        console.log(value)
+      })
+      localforage.length().then((len) => {
+        console.log('key 数量', len)
+      })
+
+      localforage.key(0).then((keyName) => {
+        console.log('第0个key', keyName)
+      })
+
+      localforage.keys().then((keys) => {
+        console.log('所有key', keys)
+      })
+      localforage
+        .iterate((value, key, iterationNumber) => {
+          console.log(key, value)
+          if (iterationNumber === 0) {
+            return [key, value]
+          }
+        })
+        .then((result) => {
+          console.log('Iteration has completed:', result)
+        })
+      //   localforage.removeItem('mykey').then(() => {
+      //    console.log('移除成功')
+      // })
+      //  localforage.clear().then(() => {
+      //   console.log('清空数据库')
+      // })
+
+      //多实例
+      var store = localforage.createInstance({
+        name: 'nameHere',
+      })
+      var otherStore = localforage.createInstance({
+        name: 'otherName',
+      })
+      //设置某个数据库key的值不会影响到另一个数据库
+      store.setItem('storekey', 'storevalue')
+      otherStore.setItem('otherstorekey', 'otherstorevalue')
+      //删除指定数据库
+      localforage.dropInstance().then(function () {
+        console.log('Dropped the store of the current instance')
+      })
+      localforage
+        .dropInstance({
+          name: 'otherstorekey',
+          storeName: 'otherStore',
+        })
+        .then(function () {
+          console.log('Dropped otherStore')
+        })
+      localforage
+        .dropInstance({
+          name: 'storekey',
+          //这里没指定，会清空所有的indexDB的数据库
+          // storeName:'store'
+        })
+        .then(function () {
+          console.log('Dropped tore Database')
+        })
+    </script>
+  </body>
+</html>

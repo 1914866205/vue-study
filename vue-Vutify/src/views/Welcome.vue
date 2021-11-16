@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <!-- <h3>卡片视图页面</h3> -->
-    <h3>主页</h3>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/home">进入主页</router-link>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Card',
+  name: 'Welcome',
   data() {
     return {}
   },
@@ -19,5 +21,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
