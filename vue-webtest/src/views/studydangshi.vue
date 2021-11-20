@@ -5,15 +5,117 @@
     <div class="nav">
       <div class="sub">
         <div class="nav-sub">重要论述</div>
-        <div class="nav-sub">要闻要论</div>
-        <div class="nav-sub">动态进展</div>
-        <div class="nav-sub">媒体集萃</div>
-        <div class="nav-sub">为民办事</div>
-        <div class="nav-sub">党史资料</div>
+        <div
+          class="nav-sub"
+          @mouseover="
+            (ifShowSubMenu1 = true),
+              (ifShowSubMenu2 = false),
+              (ifShowSubMenu3 = false),
+              (ifShowSubMenu4 = false),
+              (ifShowSubMenu5 = false)
+          "
+        >
+          要闻要论
+        </div>
+        <div
+          class="nav-sub"
+          @mouseover="
+            (ifShowSubMenu2 = true),
+              (ifShowSubMenu1 = false),
+              (ifShowSubMenu3 = false),
+              (ifShowSubMenu4 = false),
+              (ifShowSubMenu5 = false)
+          "
+        >
+          动态进展
+        </div>
+        <div
+          class="nav-sub"
+          @mouseover="
+            (ifShowSubMenu3 = true),
+              (ifShowSubMenu1 = false),
+              (ifShowSubMenu2 = false),
+              (ifShowSubMenu4 = false),
+              (ifShowSubMenu5 = false)
+          "
+        >
+          媒体集萃
+        </div>
+        <div
+          class="nav-sub"
+          @mouseover="
+            (ifShowSubMenu4 = true),
+              (ifShowSubMenu1 = false),
+              (ifShowSubMenu2 = false),
+              (ifShowSubMenu3 = false),
+              (ifShowSubMenu5 = false)
+          "
+        >
+          为民办事
+        </div>
+        <div
+          class="nav-sub"
+          @mouseover="
+            (ifShowSubMenu5 = true),
+              (ifShowSubMenu1 = false),
+              (ifShowSubMenu2 = false),
+              (ifShowSubMenu3 = false),
+              (ifShowSubMenu4 = false)
+          "
+        >
+          党史资料
+        </div>
       </div>
     </div>
+    <div
+      @mouseleave="
+        (ifShowSubMenu1 = false),
+          (ifShowSubMenu2 = false),
+          (ifShowSubMenu3 = false),
+          (ifShowSubMenu4 = false),
+          (ifShowSubMenu5 = false)
+      "
+    >
+      <div class="sub-menu" v-if="ifShowSubMenu1">
+        <div class="sub-menu-item">高层动态</div>
+        <div class="sub-menu-item">权威发布</div>
+        <div class="sub-menu-item">中央宣讲团</div>
+        <div class="sub-menu-item">要闻</div>
+        <div class="sub-menu-item">要论</div>
+      </div>
+
+      <div class="sub-menu" v-if="ifShowSubMenu2">
+        <div class="sub-menu-item">地方</div>
+        <div class="sub-menu-item">部委</div>
+        <div class="sub-menu-item">企业</div>
+        <div class="sub-menu-item">高校</div>
+        <div class="sub-menu-item">体会</div>
+        <div class="sub-menu-item">感悟</div>
+        <div class="sub-menu-item">学习实践</div>
+      </div>
+      <div class="sub-menu" v-if="ifShowSubMenu3">
+        <div class="sub-menu-item">特别推荐</div>
+        <div class="sub-menu-item">党史百年</div>
+        <div class="sub-menu-item">理论·经验</div>
+      </div>
+
+      <div class="sub-menu" v-if="ifShowSubMenu4">
+        <div class="sub-menu-item">我为群众办实事</div>
+        <div class="sub-menu-item">经验做法征集</div>
+        <div class="sub-menu-item">领导留言板</div>
+        <div class="sub-menu-item">榜样在身边</div>
+        <div class="sub-menu-item">互动交流</div>
+      </div>
+      <div class="sub-menu" v-if="ifShowSubMenu5">
+        <div class="sub-menu-item">党的基本知识</div>
+        <div class="sub-menu-item">党史百科</div>
+        <div class="sub-menu-item">百年影像</div>
+        <div class="sub-menu-item">红色展馆</div>
+      </div>
+    </div>
+
     <div>
-      <div>
+      <div class="title-position">
         <h3 class="title">
           习近平：关于《中共中央关于党的百年奋斗重大成就和历史经验的决议》的说明
         </h3>
@@ -106,6 +208,11 @@ export default {
   data() {
     return {
       value1: 0,
+      ifShowSubMenu1: false,
+      ifShowSubMenu2: false,
+      ifShowSubMenu3: false,
+      ifShowSubMenu4: false,
+      ifShowSubMenu5: false,
     };
   },
   methods: {
@@ -131,20 +238,42 @@ export default {
 }
 .sub {
   width: 70%;
+  height: 80px;
   margin-left: 14%;
-  margin-top: 21px;
 }
 .nav-sub {
   width: 12%;
+  height: 80px;
+  line-height: 80px;
   display: inline-block;
   cursor: pointer;
+}
+
+/**二级导航栏 */
+.sub-menu {
+  background-color: #f5f5f7;
+  color: black;
+  width: 100%;
+  height: 80px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: x-large;
+  font-weight: 600;
+}
+.sub-menu-item {
+  width: 12%;
+  height: 80px;
+  line-height: 80px;
+  display: inline-block;
+  cursor: pointer;
+}
+.title-position {
+  margin-top: 1%;
 }
 .title {
   color: #8b0000;
   font-family: "Courier New", Courier, monospace;
   font-size: x-large;
   font-weight: 900;
-  margin-top: 20px;
   cursor: pointer;
 }
 
@@ -181,5 +310,9 @@ export default {
   margin-bottom: 12px;
   margin-left: 20px;
   cursor: pointer;
+}
+.sub-menu-item:hover {
+  color: #910007;
+  border-bottom-style: solid;
 }
 </style>
