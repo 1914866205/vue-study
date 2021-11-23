@@ -252,6 +252,44 @@
           </div>
         </div>
       </div>
+      <div class="content-mid-2-all">
+        <div class="content-mid-2-left">
+          <div class="content-mid-2-left-title">
+            <img src="../assets/image/content-mid-2-title.png"  width="500px"/>
+          </div>
+          <div class="content-mid-2-left-content">
+            <div class="content-mid-2-left-content-item">
+              <li>习近平：努力成为可堪大用能担重任的栋梁之才</li>
+            </div>
+            <div class="content-mid-2-left-content-item">
+              <li>习近平：党的伟大精神永远是党和国家的宝贵精神财富</li>
+            </div>
+            <div class="content-mid-2-left-content-item">
+              <li>习近平：总结党的历史经验 加强党的政治建设</li>
+            </div>
+            <div class="content-mid-2-left-content-item">
+              <li>习近平：加强党史军史教育 确保官兵听党话 跟党走</li>
+            </div>
+            <div class="content-mid-2-left-content-item">
+              <li>习近平考察西藏：学史力行是党史学习教育的落脚点</li>
+            </div>
+          </div>
+        </div>
+        <div class="content-mid-2-right">
+          <div class="content-mid-2-right-title">
+            <img src="../assets/image/content-mid-2-right.png" width="250px"/>
+          </div>
+          <div class="content-mid-2-right-down">
+            <div class="content-mid-2-right-down-left-video"></div>
+            <div class="content-mid-2-right-down-right-title">
+              习近平在中央党校（国家行政学院）中青年干部培训班开班式上发表重要讲话
+            </div>
+            <div class="content-mid-2-right-down-right-content">
+              年轻干部生逢伟大时代，是党和国家事业发展的生力军，必须练好内功、提升修养，做到信念坚定、对党忠诚，注重实际、实事求是。
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -341,7 +379,6 @@ export default {
 .lunbo {
   display: inline-block;
   margin-left: 14%;
-  margin-top: 20px;
   width: 35%;
   height: 100%;
 }
@@ -384,7 +421,7 @@ export default {
 .content-mid {
   position: relative;
   width: 100%;
-  height: 800px;
+  height: 250px;
 }
 .content-mid-body-item {
   position: relative;
@@ -412,5 +449,25 @@ export default {
 .content-mid-item:hover {
   color: #cc0000;
   text-decoration: underline;
+  cursor: pointer;
 }
+.content-mid-2-all{
+  background-color: #f5f5f7;
+  width: 100%;
+  height: 400px;
+}
+.content-mid-2-left{
+
+}
+.content-mid-2-left-title{}
+.content-mid-2-left-content{}
+.content-mid-2-left-content-item{}
+.content-mid-2-right{}
+.content-mid-2-right-title{}
+.content-mid-2-right-down{}
+.content-mid-2-right-down-left-video{}
+.content-mid-2-right-down-right-title{}
+.content-mid-2-right-down-right-content{}
+
+
 </style>
