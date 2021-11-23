@@ -4,11 +4,14 @@ import router from './router'
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
 
 /**轮播图  bootstrap框架 */
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
+Vue.use(Vant);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(ViewUI);

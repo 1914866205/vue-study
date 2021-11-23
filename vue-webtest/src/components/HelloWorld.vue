@@ -8,6 +8,13 @@
       <li><a href="" target="_blank" rel="noopener">关键帧动画</a></li>
       <li><router-link to="carousel">轮播图特效</router-link></li>
     </ul>
+        <br>
+        <h3> JavaScript 操作DOM元素 </h3>
+        <br>
+    <ul>
+      <li><router-link to="register">注册</router-link></li>
+      <li><router-link to="login">登录</router-link></li>
+    </ul>
     <br>
         <h3> Web页面布局应用 </h3>
         <br>

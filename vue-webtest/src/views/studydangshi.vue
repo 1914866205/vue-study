@@ -255,7 +255,7 @@
       <div class="content-mid-2-all">
         <div class="content-mid-2-left">
           <div class="content-mid-2-left-title">
-            <img src="../assets/image/content-mid-2-title.png"  width="500px"/>
+            <img src="../assets/image/content-mid-2-title.png" width="500px" />
           </div>
           <div class="content-mid-2-left-content">
             <div class="content-mid-2-left-content-item">
@@ -277,15 +277,23 @@
         </div>
         <div class="content-mid-2-right">
           <div class="content-mid-2-right-title">
-            <img src="../assets/image/content-mid-2-right.png" width="250px"/>
+            <img src="../assets/image/content-mid-2-right.png" width="250px" />
           </div>
           <div class="content-mid-2-right-down">
-            <div class="content-mid-2-right-down-left-video"></div>
-            <div class="content-mid-2-right-down-right-title">
-              习近平在中央党校（国家行政学院）中青年干部培训班开班式上发表重要讲话
+            <div class="content-mid-2-right-down-left-video">
+              <a href="http://flv4mp4.people.com.cn/videofile7/pvmsvideo/2021/9/1/ChenQiuNan_9f645c5d0c78456667079143524c588b.mp4">
+                <img src="../assets/image/video.jpg" width="260px" />
+              </a>
             </div>
-            <div class="content-mid-2-right-down-right-content">
-              年轻干部生逢伟大时代，是党和国家事业发展的生力军，必须练好内功、提升修养，做到信念坚定、对党忠诚，注重实际、实事求是。
+
+            <div class="content-mid-2-right-down-right-body">
+              <div class="content-mid-2-right-down-right-title">
+                习近平在中央党校（国家行政学院）中青年干部培训班开班式上发表重要讲话
+              </div>
+              <div class="content-mid-2-right-down-right-content">
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                年轻干部生逢伟大时代，是党和国家事业发展的生力军，必须练好内功、提升修养，做到信念坚定、对党忠诚，注重实际、实事求是。
+              </div>
             </div>
           </div>
         </div>
@@ -451,23 +459,79 @@ export default {
   text-decoration: underline;
   cursor: pointer;
 }
-.content-mid-2-all{
+.content-mid-2-all {
   background-color: #f5f5f7;
   width: 100%;
-  height: 400px;
+  height: 260px;
 }
-.content-mid-2-left{
-
+.content-mid-2-left {
+  position: relative;
+  display: inline-block;
+  width: 50%;
 }
-.content-mid-2-left-title{}
-.content-mid-2-left-content{}
-.content-mid-2-left-content-item{}
-.content-mid-2-right{}
-.content-mid-2-right-title{}
-.content-mid-2-right-down{}
-.content-mid-2-right-down-left-video{}
-.content-mid-2-right-down-right-title{}
-.content-mid-2-right-down-right-content{}
-
-
+.content-mid-2-left-title {
+  margin: 10px;
+  margin-left: 22%;
+}
+.content-mid-2-left-content {
+  text-align: left;
+  margin-left: 28%;
+}
+.content-mid-2-left-content-item {
+  margin-bottom: 5px;
+}
+.content-mid-2-left-content-item:hover {
+  color: #cc0000;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.content-mid-2-right {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  margin-left: -90px;
+}
+.content-mid-2-right-title {
+  margin-top: 2%;
+  margin-left: 50%;
+}
+.content-mid-2-right-down {
+  display: inline-block;
+  position: relative;
+}
+.content-mid-2-right-down-left-video {
+  display: inline-block;
+  position: relative;
+  width: 50%;
+  float: left;
+  cursor: pointer;
+}
+.content-mid-2-right-down-right-body {
+  width: 50%;
+  float: left;
+  display: inline-block;
+  position: relative;
+  margin-left: -60px;
+  top: 10px;
+}
+.content-mid-2-right-down-right-title {
+  display: inline-block;
+  text-align: left;
+  position: relative;
+  font-weight: 900;
+  width: 90%;
+}
+.content-mid-2-right-down-right-title:hover {
+  color: #cc0000;
+  cursor: pointer;
+}
+.content-mid-2-right-down-right-content {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  color: #b6bec9;
+  top: 10px;
+  width: 90%;
+  cursor: pointer;
+}
 </style>

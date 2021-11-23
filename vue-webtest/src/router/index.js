@@ -16,6 +16,10 @@ const routes=[
         path:'/studydangshi',
         name:'studydangshi',
         component:()=>import('../views/studydangshi.vue')
+    },{
+        path:'/register',
+        name:'register',
+        component:()=>import('../views/register.vue')
     }
 ]
 
