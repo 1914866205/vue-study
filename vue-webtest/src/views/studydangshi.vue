@@ -175,7 +175,7 @@
             <li class="content-right-item">
               深化对新时代党的创新理论的理解和掌握
             </li>
-            <!-- <li class="content-right-item">“七一”重要讲话</li> -->
+            <li class="content-right-item">“七一”重要讲话</li>
           </div>
           <div class="content-right-body">
             <div class="content-right-title">
@@ -195,6 +195,60 @@
             <li class="content-right-item">
               北京石景山区：线上线下合力 化解矛盾纠纷
             </li>
+          </div>
+        </div>
+      </div>
+      <div class="content-mid">
+        <div class="content-mid-body-item">
+          <div class="content-mid-title">
+            <img
+              src="../assets/image/content-title-icon.png"
+              width="30px"
+              height="30px"
+            />
+            部署要求
+          </div>
+          <div class="content-mid-items">
+            <div class="content-mid-item">
+              <li>
+                党史学习教育领导小组印发《关于充分发挥基层党组织战斗堡垒...
+              </li>
+            </div>
+            <div class="content-mid-item">
+              <li>
+                党史学习教育领导小组印发《关于深入推进“我为群众办实事”实...
+              </li>
+            </div>
+            <div class="content-mid-item">
+              <li>中办印发通知：要深入领会“七一”重要讲话的重大意义</li>
+            </div>
+            <div class="content-mid-item">
+              <li>中办印发通知：在全社会开展“四史”宣传教育</li>
+            </div>
+          </div>
+        </div>
+        <div class="content-mid-body-item">
+          <div class="content-mid-title">
+            <img
+              src="../assets/image/content-title-icon.png"
+              width="30px"
+              height="30px"
+            />
+            要闻要论
+          </div>
+          <div class="content-mid-items">
+            <div class="content-mid-item">
+              <li>深化对新时代党的创新理论的理解和掌握...</li>
+            </div>
+            <div class="content-mid-item">
+              <li>牢记中国共产党是什么、要干什么...</li>
+            </div>
+            <div class="content-mid-item">
+              <li>高扬新时代中国共产党人的思想旗帜</li>
+            </div>
+            <div class="content-mid-item">
+              <li>马克思主义中国化新的飞跃</li>
+            </div>
           </div>
         </div>
       </div>
@@ -276,7 +330,10 @@ export default {
   font-weight: 900;
   cursor: pointer;
 }
-
+.title:hover {
+  color: #cc0000;
+  text-decoration: underline;
+}
 .content {
   width: 100%;
   height: 390px;
@@ -314,5 +371,46 @@ export default {
 .sub-menu-item:hover {
   color: #910007;
   border-bottom-style: solid;
+}
+
+.content-right-item:hover {
+  color: #cc0000;
+  text-decoration: underline;
+}
+.content-right-title:hover {
+  color: #cc0000;
+  text-decoration: underline;
+}
+.content-mid {
+  position: relative;
+  width: 100%;
+  height: 800px;
+}
+.content-mid-body-item {
+  position: relative;
+  display: inline-block;
+  width: 34%;
+  margin-left: 50px;
+}
+.content-mid-title {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 30px;
+  font-weight: 999;
+  text-align: left;
+  width: 50%;
+  margin-left: 2%;
+  margin-top: 7%;
+}
+.content-mid-items {
+  text-align: left;
+  margin-top: 10px;
+}
+.content-mid-item {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-top: 10px;
+}
+.content-mid-item:hover {
+  color: #cc0000;
+  text-decoration: underline;
 }
 </style>
