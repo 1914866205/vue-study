@@ -99,6 +99,7 @@ export default {
       message: "",
       fileName: "请选择文件",
       column: "",
+      hobby:'',
     };
   },
   methods: {
@@ -107,15 +108,14 @@ export default {
       // console.log(values.username);
       // console.log(values.password);
       // console.log(values.gender);
-      let hobby="";
       for (let i = 0; i < values.checkboxGroup.length; i++) {
         // console.log(values.checkboxGroup[i]);
-        hobby+=values.checkboxGroup[i]+" ";
+        this.hobby += values.checkboxGroup[i] + "、";
       }
       // console.log(values.checkboxGroup);
       // console.log(this.column);
       // console.log(this.message);
-
+      this.hobby=this.hobby.substr(0,this.hobby.length-1)
       alert(
         "用户名：" +
           values.username +
@@ -127,7 +127,7 @@ export default {
           values.gender +
           "\n " +
           "爱好：" +
-         hobby +
+          this.hobby +
           "\n " +
           "科目：" +
           this.column +
@@ -138,6 +138,14 @@ export default {
           "留言：" +
           this.message
       );
+      this.$store.state.user.username = values.username;
+      this.$store.state.user.password = values.password;
+      this.$store.state.user.gender = values.gender;
+      this.$store.state.user.hobby = this.hobby;
+      this.$store.state.user.subject = this.column;
+      this.$store.state.user.fileName = this.fileName;
+      this.$store.state.user.message = this.message;
+      console.log(this.$store.state.user.hobby)
     },
     onConfirm(value, index) {
       // Toast(`当前值：${value}, 当前索引：${index}`);
