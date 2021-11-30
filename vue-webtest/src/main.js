@@ -23,7 +23,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import store from './store'
 Vue.prototype.$store=store;
 
-
 Vue.use(Vant);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
