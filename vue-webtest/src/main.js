@@ -7,6 +7,10 @@ import 'view-design/dist/styles/iview.css';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Vant from 'vant';
 import 'vant/lib/index.css';
+/**登录页面  Ant Design Vue 框架 完整引入 */
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
+Vue.config.productionTip = false;
 
 
 /**轮播图  bootstrap框架 */
@@ -24,6 +28,7 @@ Vue.use(IconsPlugin)
 Vue.use(ViewUI);
 Vue.config.productionTip = false
 Vue.use(Vuex)
+Vue.use(Antd);
 
 new Vue({
   router,

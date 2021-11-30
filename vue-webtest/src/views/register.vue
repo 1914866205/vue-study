@@ -79,6 +79,7 @@
         </div>
       </van-form>
     </div>
+    <router-link to="login">login now !</router-link>
   </div>
 </template>
 
@@ -99,7 +100,7 @@ export default {
       message: "",
       fileName: "请选择文件",
       column: "",
-      hobby:'',
+      hobby: "",
     };
   },
   methods: {
@@ -115,7 +116,7 @@ export default {
       // console.log(values.checkboxGroup);
       // console.log(this.column);
       // console.log(this.message);
-      this.hobby=this.hobby.substr(0,this.hobby.length-1)
+      this.hobby = this.hobby.substr(0, this.hobby.length - 1);
       alert(
         "用户名：" +
           values.username +
@@ -145,7 +146,7 @@ export default {
       this.$store.state.user.subject = this.column;
       this.$store.state.user.fileName = this.fileName;
       this.$store.state.user.message = this.message;
-      console.log(this.$store.state.user.hobby)
+      console.log(this.$store.state.user.hobby);
     },
     onConfirm(value, index) {
       // Toast(`当前值：${value}, 当前索引：${index}`);
