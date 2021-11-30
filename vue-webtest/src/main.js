@@ -11,7 +11,9 @@ import 'vant/lib/index.css';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 Vue.config.productionTip = false;
-
+/**好看的特效背景墙 */
+import FlatSurfaceShader from 'vue-flat-surface-shader'
+Vue.use(FlatSurfaceShader)
 
 /**轮播图  bootstrap框架 */
 import 'bootstrap/dist/css/bootstrap.css'

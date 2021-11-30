@@ -90,7 +90,7 @@ export default {
           ) {
             alert(
               "登录成功" +
-                " \n " +
+                " \n " + 
                 "用户名：" +
                 this.$store.state.user.username +
                 "\n " +
